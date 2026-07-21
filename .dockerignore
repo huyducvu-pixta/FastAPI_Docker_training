@@ -1,0 +1,6 @@
+__pycache__/
+
+.venv/
+app/data/MNIST
+.DS_Store
+app/test_samples/creat_test_samples.py

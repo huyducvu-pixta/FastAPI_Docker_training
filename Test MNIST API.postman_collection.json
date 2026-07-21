@@ -1,0 +1,193 @@
+{
+  "info": {
+    "_postman_id": "eae5f58d-4b30-4011-b9e8-cab139a7429c",
+    "name": "Test MNIST API",
+    "description": "Một số API request để test cho MNIST API\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56749101",
+    "_collection_link": "https://go.postman.co/collection/56749101-eae5f58d-4b30-4011-b9e8-cab139a7429c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET root check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET list models check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/models",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "models"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET activated model check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/deploy/current",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "deploy",
+            "current"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT change activated model check",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model_name\": \"mlp\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/deploy/current",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "deploy",
+            "current"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST predict image check",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"image_path\": \"digit_8.png\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/predict",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "predict"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET get prediction histories check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/predict",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "predict"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET get prediction history by id check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/predict/71968341-2cb0-4482-8509-b52aa4537ba8",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "predict",
+            "71968341-2cb0-4482-8509-b52aa4537ba8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE prediction by id check",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/predict/71968341-2cb0-4482-8509-b52aa4537ba8",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "predict",
+            "71968341-2cb0-4482-8509-b52aa4537ba8"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
