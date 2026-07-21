@@ -15,7 +15,7 @@ Ví dụ request predict:
 
 ```json
 {
-  "image_path": "digit_8.png"
+  "image_path": "digit_0.png"
 }
 ```
 
