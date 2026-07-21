@@ -91,3 +91,6 @@ Postman test exported file:
 ```text
 Test MNIST API.postman_collection.json
 ```
+
+
+Ghi chú ngắn về API, FastAPI và Docker ở trong API_FASTAPI_DOCKER_NOTES.md
