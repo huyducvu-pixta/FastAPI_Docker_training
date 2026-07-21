@@ -1,15 +1,23 @@
 from fastapi import APIRouter, Depends
 
 from app.api.dependencies import get_inference_service
-from app.schemas.predict import PredictRequest, PredictResponse
+from app.schemas.predict import PredictRequest, PredictV1Response, PredictV2Response
 from app.services.inference_service import InferenceService
 
 
 router = APIRouter(prefix="/api/predict", tags=["predict"])
 
 
-@router.post("", response_model=PredictResponse)
-def create_prediction(
+@router.post("/v1", response_model=PredictV1Response)
+def create_prediction_v1(
+    request: PredictRequest,
+    inference_service: InferenceService = Depends(get_inference_service),
+):
+    return inference_service.predict(request.image_path)
+
+
+@router.post("/v2", response_model=PredictV2Response)
+def create_prediction_v2(
     request: PredictRequest,
     inference_service: InferenceService = Depends(get_inference_service),
 ):

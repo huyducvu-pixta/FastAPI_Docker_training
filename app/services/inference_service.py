@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+import time
 from uuid import uuid4
 from app.services.model_loader import ModelLoader
 import torch
@@ -14,6 +15,7 @@ class InferenceService:
         self.predict_history =[]
 
     def predict(self, path: str):
+        start_time = time.time()
         sample_path = self.sample_dir / path
         if not sample_path.exists():
             raise HTTPException(status_code=404, detail=f"Sample '{path}' not found.")
@@ -28,12 +30,14 @@ class InferenceService:
             predicted_class = y.argmax(dim=1).item()
             confidence = torch.softmax(y, dim=1)[0, predicted_class].item()
 
+        execution_time = time.time() - start_time
         prediction ={
             "id": str(uuid4()),
             "model_name": self.model_loader.get_activated_model(),
             "model_path": self.model_loader.get_activated_model_path(),
             "predicted_class": predicted_class,
             "confidence": confidence,
+            "execution_time": execution_time,
             "timestamp": datetime.now().isoformat(),
         }
         self.predict_history.append(prediction)

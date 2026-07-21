@@ -11,7 +11,11 @@ API cho phép:
 - Gửi ảnh chữ số mẫu và nhận kết quả dự đoán.
 - Xem, lấy chi tiết và xóa lịch sử prediction.
 
-Ví dụ request predict:
+Ví dụ request predict version 1:
+
+```text
+POST /api/predict/v1
+```
 
 ```json
 {
@@ -19,14 +23,27 @@ Ví dụ request predict:
 }
 ```
 
-API sẽ trả về class dự đoán, confidence và model đang dùng:
+API sẽ trả về class dự đoán:
 
 ```json
 {
-  "id": "a0752cf0-e75b-4237-b864-684c9ba5531c",
-  "model_name": "cnn",
+  "predicted_class": 0
+}
+```
+
+Ví dụ request predict version 2:
+
+```text
+POST /api/predict/v2
+```
+
+API sẽ trả về class dự đoán, confidence và thời gian chạy:
+
+```json
+{
   "predicted_class": 0,
-  "confidence": 0.9999945163726807
+  "confidence": 0.9999945163726807,
+  "execution_time": 0.0123
 }
 ```
 

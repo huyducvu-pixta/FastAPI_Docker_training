@@ -99,7 +99,24 @@
       "response": []
     },
     {
-      "name": "POST predict image check",
+      "name": "POST predict image v1 check",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"V1 returns predicted_class only\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json).to.have.property(\"predicted_class\");",
+              "  pm.expect(json).to.not.have.property(\"confidence\");",
+              "  pm.expect(json).to.not.have.property(\"execution_time\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -113,7 +130,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8000/api/predict",
+          "raw": "http://localhost:8000/api/predict/v1",
           "protocol": "http",
           "host": [
             "localhost"
@@ -121,7 +138,57 @@
           "port": "8000",
           "path": [
             "api",
-            "predict"
+            "predict",
+            "v1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST predict image v2 check",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"V2 returns prediction metadata\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json).to.have.property(\"predicted_class\");",
+              "  pm.expect(json).to.have.property(\"confidence\");",
+              "  pm.expect(json).to.have.property(\"execution_time\");",
+              "  pm.expect(json.confidence).to.be.a(\"number\");",
+              "  pm.expect(json.execution_time).to.be.a(\"number\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"image_path\": \"digit_8.png\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/predict/v2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "predict",
+            "v2"
           ]
         }
       },
